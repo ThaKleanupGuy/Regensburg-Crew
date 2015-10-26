@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Threading.Tasks;
+
+namespace Vier_Gewinnt
+{
+    public class Player
+    {
+        private string _name;
+        private IList<Spielstein> Steine = new List<Spielstein>();
+        private readonly Color _farbe;
+        public int Anzahl_Siege { get; set; }
+
+        public Player(string Name, Color Farbe)
+        {
+            if (Name == null) throw new ArgumentNullException("Playername");
+            _name = Name;
+            if (Farbe==null) throw new ArgumentNullException("Color");
+            _farbe=Farbe;
+            for (int i=0 ; i < 21 ; i++)
+            {
+                Steine.Add(new Spielstein(Farbe));
+            }
+        }
+
+        public Player(Color Farbe)
+        {
+            if (Farbe == null) throw new ArgumentNullException("Color");
+            _farbe = Farbe;
+            for (int i = 0; i < 21; i++)
+            {
+                Steine.Add(new Spielstein(Farbe));
+            }
+        }
+
+
+        public Color Farbe
+        { get { return _farbe; } }
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("Spielername!");
+                _name = value;
+            }
+        }
+
+        public void SetzeSteineZurück()
+        {
+            Steine = new List<Spielstein>();
+            for (int i = 0; i < 21; i++)
+            {
+                Steine.Add(new Spielstein(_farbe));
+            }
+        }
+
+        public int AnzahlSpielsteine
+        { get { return Steine.Count; } }
+
+        public void EntferneSpielstein()
+        {
+            if (Steine.Count == 0) throw new ArgumentException("Liste ist leer!");
+            Steine.RemoveAt(Steine.Count - 1);
+        }
+    }
+}

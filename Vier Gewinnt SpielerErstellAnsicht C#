@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Vier_Gewinnt
+{
+    /// <summary>
+    /// Interaction logic for Spieler_Erstell_Ansicht.xaml
+    /// </summary>
+    public partial class Spieler_Erstellen_Ansicht : Window
+    {
+        private Player Neuer_Spieler;
+
+        public Spieler_Erstellen_Ansicht(string Name, Player spieler)
+        {
+            InitializeComponent();
+            if (Name == null) throw new ArgumentNullException("Überschrift");
+            if (spieler == null) throw new ArgumentNullException("Spieler");
+            ÜberschriftBlock.Text = Name;
+            Neuer_Spieler = spieler;
+        }
+
+        private void ErstellButton_Click(object sender, RoutedEventArgs e)
+        {
+                Neuer_Spieler.Name = Eingabebox.Text;
+                this.Close();
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (Neuer_Spieler.Name==null || Neuer_Spieler.Name.Count() < 1)
+                Neuer_Spieler.Name = ÜberschriftBlock.Text;
+            base.OnClosing(e);
+        }
+
+
+        private void Eingabebox_TouchEnter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                Neuer_Spieler.Name = Eingabebox.Text;
+                this.Close();
+            }
+        }
+
+    }
+}

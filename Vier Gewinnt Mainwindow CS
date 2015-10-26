@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Vier_Gewinnt
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public SolidColorBrush Farbe1 = new SolidColorBrush(Colors.White);
+        IList<Ellipse> Felder = new List<Ellipse>();
+        IList<Button> Buttons = new List<Button>();
+        Spiel VierGewinnt;
+        public MainWindow()
+        {
+            InitializeComponent();
+            var Borders = Spielfeld.Children.OfType<Border>();
+            var ButtonList = ButtonGrid.Children.OfType<Button>();
+            
+            foreach (var item in Borders)
+            {
+                var feld = item.Child as Ellipse;
+                feld.Fill = Farbe1;
+                Felder.Add(feld);
+            }
+
+            foreach (var item in ButtonList)
+            {
+                var button = item as Button;
+                Buttons.Add(button);
+            }
+
+            //VierGewinnt = new Spiel("Chrishan", "Leonweich", Felder); Alte Version
+
+            VierGewinnt = new Spiel(Felder);
+
+            this.DataContext = VierGewinnt;
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var Button = sender as Button;
+            int Reihe = Convert.ToInt32(Button.Name.Last()) - 48;
+            if(VierGewinnt.Spielzug(Reihe, Button))
+            {
+                MessageBox.Show(this,
+                                string.Format("{0} Hat gewonnen und {1} ist leider einfach zu dumm :) !",VierGewinnt.Sieger,VierGewinnt.Verlierer),
+                                "Gewonnen!",
+                                MessageBoxButton.OK);
+                SetzeAnzeigeZurück();
+                VierGewinnt.SetzeSpielZurück();
+            }
+            if(VierGewinnt.ÜberprüfeUnentschieden()==true)
+            {
+                MessageBox.Show(this,
+                                 "Das Spiel ist unentschieden ausgegangen :( !",
+                                 "Unentschieden!",
+                                 MessageBoxButton.OK);
+                SetzeAnzeigeZurück();
+                VierGewinnt.SetzeSpielZurück();
+            }
+        }
+
+        private void SetzeAnzeigeZurück()
+        {
+            foreach (var button in Buttons)
+            {
+                button.IsEnabled = true;
+            }
+            foreach (var feld in Felder)
+            {
+                feld.Fill = Farbe1;
+                feld.IsEnabled = true;
+            }
+        }
+    }
+}

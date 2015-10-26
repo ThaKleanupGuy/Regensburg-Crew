@@ -1,0 +1,215 @@
+<Window x:Class="Vier_Gewinnt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:game="clr-namespace:Vier_Gewinnt"
+        Title="Vier Gewinnt" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen"
+        Icon="VierGewinntIcon.png">
+    <Grid Background="#FF70A7DE">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+                <Grid x:Name="Spielfeld" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Grid.Row="0" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="1" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="2" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="3" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="4" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="5" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="0" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="1" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="2" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="3" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="4" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="5" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="0" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="1" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="2" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="3" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="4" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="5" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="0" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="1" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="2" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="3" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="4" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="3" Grid.Row="5" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="0" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="1" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="2" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="3" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="4" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="4" Grid.Row="5" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="0" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="1" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="2" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="3" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="4" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="5" Grid.Row="5" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="6" Grid.Row="0" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="6" Grid.Row="1" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="6" Grid.Row="2" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="6" Grid.Row="3" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="6" Grid.Row="4" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                    <Border Grid.Column="6" Grid.Row="5" Style="{DynamicResource Raster}">
+                        <Ellipse Style="{DynamicResource SteineDarstellung}"/>
+                    </Border>
+                </Grid>
+            </Border>
+            <StackPanel>
+                <TextBlock x:Name="Spieler1_Überschrift" Style="{StaticResource SPielerNameStyle}" Text="{Binding Path=Spieler1}"/>
+                <TextBlock Style="{StaticResource InfoAnzeige}" Text="{Binding Path=SiegeSpieler1}" />
+                <TextBlock Style="{StaticResource InfoAnzeige}" Text="{Binding Path=AnzahlSteineSP1}"/>
+                <TextBlock Style="{StaticResource InfoAnzeige}" Text="Farbe:"/>
+                <Ellipse Width="30" Height="30" Fill="Red" Margin="0 5"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock x:Name="Spieler2_Überschrift" Style="{StaticResource SPielerNameStyle}" Text="{Binding Path=Spieler2}"/>
+                <TextBlock Style="{StaticResource InfoAnzeige}" Text="{Binding Path=SiegeSpieler2}" />
+                <TextBlock Style="{StaticResource InfoAnzeige}" Text="{Binding Path=AnzahlSteineSP2}"/>
+                <TextBlock Style="{StaticResource InfoAnzeige}" Text="Farbe:"/>
+                <Ellipse Width="30" Height="30" Fill="Yellow" Margin="0 5"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="ButtonGrid" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="_1" Style="{DynamicResource ButtonStyle}" Content="Row 1" Click="Button_Click"/>
+                <Button x:Name="_2" Style="{DynamicResource ButtonStyle}" Content="Row 2" Grid.Column="1" Click="Button_Click"/>
+                <Button x:Name="_3" Style="{DynamicResource ButtonStyle}" Content="Row 3" Grid.Column="2" Click="Button_Click"/>
+                <Button x:Name="_4" Style="{DynamicResource ButtonStyle}" Content="Row 4" Grid.Column="3" Click="Button_Click"/>
+                <Button x:Name="_5" Style="{DynamicResource ButtonStyle}" Content="Row 5" Grid.Column="4" Click="Button_Click"/>
+                <Button x:Name="_6" Style="{DynamicResource ButtonStyle}" Content="Row 6" Grid.Column="5" Click="Button_Click"/>
+                <Button x:Name="_7" Style="{DynamicResource ButtonStyle}" Content="Row 7" Grid.Column="6" Click="Button_Click"/>
+            </Grid>
+            <Grid Grid.Column="0">
+                <TextBlock Text="{Binding Path=AnzahlUnentschieden}" FontSize="13" TextAlignment="Center" Margin="0 5"/>
+            </Grid>
+        <StackPanel Grid.Column="2">
+                <TextBlock Text="Am Zug:" TextAlignment="Center" FontSize="15"/>
+            <Ellipse  VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Width="30" Margin="0 5" Fill="{Binding Path=AktuelleFarbe}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,122 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.ComponentModel;
+
+namespace Vier_Gewinnt
+{
+    public class Spiel : INotifyPropertyChanged
+    {
+        private IList<Player> _spieler = new List<Player>();
+        private SpielBrett _spielbrett;
+        private int _turn = 0;
+        private string _sieger;
+        private string _verlierer;
+        private int _unentschieden = 0;
+        public string Sieger { get { return _sieger; } }
+        public string Verlierer { get { return _verlierer; } }
+
+        public string Spieler1 { get { return _spieler[0].Name; } }
+        public string Spieler2 { get { return _spieler[1].Name; } }
+
+        public string SiegeSpieler1 { get { return string.Format("Siege: {0}", _spieler[0].Anzahl_Siege); } }
+        public string SiegeSpieler2 { get { return string.Format("Siege: {0}", _spieler[1].Anzahl_Siege); } }
+
+        public string AnzahlSteineSP1 { get { return string.Format("Steine: {0}", _spieler[0].AnzahlSpielsteine); } }
+        public string AnzahlSteineSP2 { get { return string.Format("Steine: {0}", _spieler[1].AnzahlSpielsteine); } }
+
+        public string AnzahlUnentschieden { get { return string.Format("Unentschieden: \n{0}", _unentschieden); } }
+
+        public SolidColorBrush AktuelleFarbe { get { return new SolidColorBrush(_spieler[_turn].Farbe); } }
+
+
+        public Spiel(string Spieler1, string Spieler2, IList<Ellipse> Spielbrett)
+        {
+            if (Spieler1 == null || Spieler2 == null) throw new ArgumentNullException("SpielerNamen!");
+            if (Spielbrett == null) throw new ArgumentNullException("Spielbrett");
+            var Player1 = new Player(Spieler1, Colors.Red);
+            var Player2 = new Player(Spieler2, Colors.Yellow);
+            _spieler.Add(Player1);
+            _spieler.Add(Player2);
+            _spielbrett = new SpielBrett(Spielbrett);
+        }
+
+        public Spiel(IList<Ellipse> Spielbrett)
+        {
+            if (Spielbrett == null) throw new ArgumentNullException("Spielbrett");
+            var Player1 = new Player(Colors.Red);
+            var Player2 = new Player(Colors.Yellow);
+            Spieler_Erstellen_Ansicht Ansicht1 = new Spieler_Erstellen_Ansicht("Spieler1", Player1);
+            Ansicht1.ShowDialog();
+            Spieler_Erstellen_Ansicht Ansicht2 = new Spieler_Erstellen_Ansicht("Spieler2", Player2);
+            Ansicht2.ShowDialog();
+            _spieler.Add(Player1);
+            _spieler.Add(Player2);
+            _spielbrett = new SpielBrett(Spielbrett);
+        }
+
+        public bool Spielzug(int Reihe, Button button)
+        {
+            _spielbrett.SetzeStein(Reihe, _spieler[_turn], button);
+            _spieler[_turn].EntferneSpielstein();
+            
+            if (ÜberprüfeUnentschieden() == true)
+                _unentschieden++;
+
+            if(_spielbrett.ÜberprüfeSieg(_spieler[_turn]))
+            {
+                _sieger = _spieler[_turn].Name;
+                _verlierer = _spieler[(_turn+1)%2].Name;
+                _spieler[_turn].Anzahl_Siege++;
+                NotifyPropertyChanged(string.Format("SiegeSpieler{0}", _turn+1));
+                NotifyPropertyChanged("AktuelleFarbe");
+                _turn = (_turn + 1) % 2;
+                return true;
+            }
+            NotifyPropertyChanged(string.Format("AnzahlSteineSP{0}", _turn + 1));
+            _turn=(_turn+1)%2;
+            NotifyPropertyChanged("AktuelleFarbe");
+            return false;
+        }
+
+        public void SetzeSpielZurück()
+        {
+            _turn = 0;
+            _spielbrett.SetzeBrettZurück();
+            foreach (var Spieler in _spieler)
+            {
+                Spieler.SetzeSteineZurück();
+            }
+            NotifyPropertyChanged("AnzahlSteineSP1");
+            NotifyPropertyChanged("AnzahlSteineSP2");
+            NotifyPropertyChanged("AktuelleFarbe");
+            NotifyPropertyChanged("AnzahlUnentschieden");
+        }
+
+        public bool ÜberprüfeUnentschieden()
+        {
+            return _spielbrett.ÜberprüfeUnentschieden();
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string propertyname)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
+            }
+        }
+    }
+}
